@@ -34,3 +34,10 @@ mx = np.matrix([[0.6,0.4],[0.15,0.85]])
 res = nstepmc(initial,mx,150)
 
 print(res)
+
+# gambler
+mxg = np.matrix([[1,0,0,0],[0.5,0,0.5,0],[0,0.5,0,0.5],[0,0,0,1]])
+initialg = np.matrix([0,0,1,0])
+res2 = nstepmc(initialg,mxg,100)
+
+print(res)
