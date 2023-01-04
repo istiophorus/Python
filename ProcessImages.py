@@ -4,7 +4,7 @@ from os.path import isfile, join
 from collections import defaultdict
 
 inputFiles = "d:/Dane/diabetic-retinopathy-detection/unpacked/train"
-outputFile = "d:/Dane/diabetic-retinopathy-detection/unpacked/train_small"
+outputFile = "d:/Dane/diabetic-retinopathy-detection/unpacked/train_small_2"
 
 onlyfiles = [(f, join(inputFiles, f), join(outputFile, f)) for f in listdir(inputFiles) if isfile(join(inputFiles, f))]
 existingfiles = [join(outputFile, f) for f in listdir(outputFile) if isfile(join(outputFile, f))]
@@ -189,9 +189,9 @@ def process_images(files, outputPath, existingfilesSet, useExtended, checkLightP
             continue
         
         if useExtended:
-            cropData = computeCropDataExt(im, pix, 100, checkLightPixels)
+            cropData = computeCropDataExt(im, pix, 50, checkLightPixels)
         else:
-            cropData = computeCropData(im, pix, 100)
+            cropData = computeCropData(im, pix, 50)
 
         if cropData is None:
             print("No crop data for image " + pathIn)
@@ -200,7 +200,7 @@ def process_images(files, outputPath, existingfilesSet, useExtended, checkLightP
         imCrop = im.crop(cropData)
         #outFile = outputPath + "/" + fileName + '.png'
         
-        imResize = imCrop.resize((600, 600))
+        imResize = imCrop.resize((224, 224))
         imResize.save(outFile)
         print(ix)
         print(outFile)
@@ -208,4 +208,4 @@ def process_images(files, outputPath, existingfilesSet, useExtended, checkLightP
         print(cropData)
         ix = ix + 1
 
-process_images(filteredFiles, outputFile, existingfilesSet, True, False)
+process_images(filteredFiles, outputFile, existingfilesSet, False, False)
